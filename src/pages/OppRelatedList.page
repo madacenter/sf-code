@@ -1,0 +1,94 @@
+<apex:page standardController="Contact" extensions="oppRelatedList">
+<style>
+.rodd {
+//  background: #E0E0E0;
+}
+.reven {
+  //background: #CFE4F2;
+}
+
+</style>
+
+        <apex:pageBlock id="thePageBlock" title="Donations">
+            <apex:facet name="header">
+      <div class="pbTitle" style="padding-left:12px;padding-top:5px;">
+			<img src="/img/icon/hands32.png" class="relatedListIcon" style="width:32px;display:block;margin-left:0;" />
+			<h3 class="mainTitle" style="line-height:27px;">&nbsp;Donations</h3>
+		</div>
+   </apex:facet>
+             <apex:form >
+        <apex:outputPanel id="mainPanel">
+            <apex:outputPanel rendered="{!AND(IF(paginater.isAll, false, true), IF(paginater.totalPage == 1, false, true))}" >
+                <span style="float:left;width:5%;">
+                <apex:outputText rendered="{!paginater.showPrevious}" >
+                    ◀ <apex:commandLink action="{!previousPage}" value="Prev" rerender="mainPanel"  />
+                </apex:outputText></span>
+                <div style="display: inline-block;margin: 0 auto; width: 90%; text-align: center;">
+                    
+                
+                <apex:repeat value="{!paginater.pageList}" var="pl" >
+                    <apex:outputText rendered="{!!pl.isActive}" >&nbsp;
+                        <apex:commandLink action="{!updatePage}" rerender="mainPanel" >
+                            {!pl.pageNum}                              
+                            <apex:param name="selectedPage" value="{!pl.pageNum}" assignTo="{!paginater.pageNum}" />
+                        </apex:commandLink>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!pl.isActive}" value=" {!pl.pageNum}" />
+                      
+                </apex:repeat>
+                </div>
+                <span style="float:right;width:5%;">
+                <apex:outputText rendered="{!paginater.showNext}" >
+                    <apex:commandLink action="{!nextPage}" value="Next" rerender="mainPanel"  /> ▶
+                </apex:outputText>
+                </span>
+            </apex:outputPanel>
+            <br/>
+            <apex:outputPanel id="dataPanel">
+                <apex:pageBlockTable value="{!genericList}" var="o" rowClasses="rodd, reven" >
+            <apex:column headerValue="Action"><apex:outputLink value="/{!o.OpportunityId}/e?&retURL=%2F{!Id}" id="edit" target="_top">Edit</apex:outputLink>&nbsp;|&nbsp;<apex:outputLink target="_top" value="/setup/own/deleteredirect.jsp?delID={!o.OpportunityId}&retURL=%2F{!Id}" id="Del">Del</apex:outputLink></apex:column>
+            <apex:column headerValue="Opportunity Name"><apex:outputLink value="/{!o.OpportunityId}" id="theLink" target="_top">{!o.Opportunity.Name}</apex:outputLink></apex:column>
+                <apex:column headerValue="Campaign" value="{!o.Opportunity.CampaignId}"/>
+                
+                <apex:column headerValue="Amount" value="{!o.Opportunity.Amount}"/>
+                <apex:column headerValue="Close Date" value="{!o.Opportunity.CloseDate}"/>
+                <apex:column headerValue="Stage" value="{!o.Opportunity.StageName}"/>
+                <apex:column headerValue="Balance" value="{!o.Opportunity.npe01__Amount_Outstanding__c}" style="{!IF(o.Opportunity.npe01__Amount_Outstanding__c > 0,'color:red;font-weight: bold', 'color:black')}"/>
+                <apex:column headerValue="Household & Org" value="{!o.Opportunity.AccountId}"/>
+                <apex:column headerValue="Role" value="{!o.Role}"/>
+                <apex:column headerValue="Primary" value="{!o.isPrimary}"/>
+                
+                </apex:pageBlockTable>                   
+            </apex:outputPanel>
+            <br />
+            <apex:outputPanel rendered="{!AND(IF(paginater.isAll, false, true), IF(paginater.totalPage == 1, false, true))}" >
+                <span style="float:left;width:5%;">
+                <apex:outputText rendered="{!paginater.showPrevious}" >
+                    ◀ <apex:commandLink action="{!previousPage}" value="Prev" rerender="mainPanel"  />
+                </apex:outputText></span>
+                <div style="display: inline-block;margin: 0 auto; width: 90%; text-align: center;">
+                    
+                
+                <apex:repeat value="{!paginater.pageList}" var="pl" >
+                    <apex:outputText rendered="{!!pl.isActive}" >&nbsp;
+                        <apex:commandLink action="{!updatePage}" rerender="mainPanel" >
+                            {!pl.pageNum}                              
+                            <apex:param name="selectedPage" value="{!pl.pageNum}" assignTo="{!paginater.pageNum}" />
+                        </apex:commandLink>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!pl.isActive}" value=" {!pl.pageNum}" />
+                      
+                </apex:repeat>
+                </div>
+                <span style="float:right;width:5%;">
+                <apex:outputText rendered="{!paginater.showNext}" >
+                    <apex:commandLink action="{!nextPage}" value="Next" rerender="mainPanel"  /> ▶
+                </apex:outputText>
+                </span>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:form>
+            
+        </apex:pageBlock>
+   
+</apex:page>
