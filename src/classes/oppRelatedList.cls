@@ -81,11 +81,7 @@ public with sharing class oppRelatedList {
     
     
 
-    // NEW CODE
-    // Standard Set Controllers are system-provided components for dealing with sets of
-    // records easily. They're known as Standard List Controllers in the Visualforce
-    // documentation as they can be utilised directly by Visualforce pages through the
-    // use of the recordSetVar parameter in <apex:page> tags
+    
     
     
     
