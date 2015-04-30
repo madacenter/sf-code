@@ -1,4 +1,7 @@
-/**This Paginate Class is the class that keeps track of all the pagination information */
+/**This Paginate Class is the class that keeps track of all the pagination information 
+Using https://www.sundoginteractive.com/sunblog/posts/server-side-pagination-in-apex-visualforce-for-custom-classes
+
+*/
 public class Paginate {
     public Integer index {get;set;}
     public Integer pageNum {get;set;}

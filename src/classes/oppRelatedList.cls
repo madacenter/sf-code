@@ -1,4 +1,5 @@
 public with sharing class oppRelatedList {
+/** Based on https://www.sundoginteractive.com/sunblog/posts/server-side-pagination-in-apex-visualforce-for-custom-classes */
 // Private reference to the record loaded by the standard controller... (the contact
     // being viewed)
     // 
